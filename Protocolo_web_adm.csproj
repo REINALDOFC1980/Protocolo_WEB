@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4css_4bootstrap_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+  <ItemGroup>
+    <Content Remove="Views\Triagem\_DetalhamentoProcesso.cshtml" />
+    <Content Remove="wwwroot\js\notiflix-3.2.6.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\notiflix-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-block-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-confirm-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-loading-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-notify-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-report-aio-3.2.6.min.js" />
+    <None Include="wwwroot\js\notiflix-3.2.6.min.js" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.0.123" />
+
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.32" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
+		<PackageReference Include="jQuery" Version="3.6.0" />
+		<PackageReference Include="jQuery.UI.Combined" Version="1.13.0" />
+		<PackageReference Include="RestSharp" Version="110.2.0" />
+	
+
+
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\dist\" />
+	</ItemGroup>
+	
+</Project>

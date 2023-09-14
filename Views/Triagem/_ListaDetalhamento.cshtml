@@ -1,0 +1,285 @@
+﻿@model Protocolo_web_adm.Models.ProcessoModel
+  
+@{
+    if(Model != null )
+    {
+        <div class="mail-box-header">
+        <div class="float-right tooltip-demo">
+            <a href="#" class="btn btn-primary btn-sm" id="btnAceitar" name="btnAceitar" data-toggle="tooltip" data-placement="top" title="Aprovar" onclick="AceitarProcesso('@Model.Pro_Id',1)"><i class="fa fa-thumbs-o-up"></i> Aprovar</a>
+            <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Imprimir"><i class="fa fa-print"></i> </a>
+            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal5" title="Reprovar">
+            <i class="fa fa-thumbs-o-down"></i> Reprovar
+            </a>
+      
+        </div>
+         <h2> <small>Processo:</small> <strong>@Model.Pro_Numero</strong> </h2>
+         <h5><span class="float-left font-normal">Data abertura: <strong> @Model.Pro_DataCriacao</strong></span></h5>
+   @*     <div class="mail-tools tooltip-demo m-t-md">      
+             
+            <span class="float-right font-normal">Data abertura: 01/07/2023</span>
+            <span class="font-normal">Revisor: </span>MICHELLELEITE
+           
+        </div>*@
+        </div>
+        <div class="mail-box">
+        <div class="ibox-content">
+
+            <form role="form" id="form_aceitar">
+                <div class="row form-group">
+                    <div class="col-md-1">
+                        <label>NA</label>
+                        <input type="hidden" id="Pro_id" name="Pro_id" value="@Model.Pro_Id">
+                        <input type="text" placeholder="" class="form-control" value="@Model.MultasModels.Mut_AIT" disabled>
+                    </div>
+                    <div class="col-md-1">
+                        <label>Infração</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.MultasModels.Mut_CodigoInfracao" disabled>
+                    </div>
+                       <div class="col-md-1">
+                        <label>Data Infração</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.MultasModels.Mut_DataInfracao" disabled>
+                    </div>
+                     <div class="col-md-4">
+                        <label>Descrição</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.MultasModels.Mut_DescricaoInfracao" disabled>
+                    </div>
+                    <div class="col-md-1">
+                        <label>Placa</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.VeiculoModel.Vec_Placa"  disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Renava</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.VeiculoModel.Vec_RENAVAN" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Marca/Modelo</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.VeiculoModel.Vec_Marca"  disabled>
+                    </div>
+                </div>
+
+
+
+                <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
+                    <li class="warning-element" id="task1">
+                        <strong> DADOS DO PROPRIETÁRIO </strong>
+                    </li>
+                </ul>
+                <div class="row form-group">
+                    <div class="col-md-2">
+                        <label>CPF/CNPJ</label>
+                    <input type="text" placeholder="" class="form-control" value="@Model.RequerenteModel.Req_CPF_CNPJ" disabled>
+                    </div>
+                    <div class="col-md-8">
+                        <label>Nome</label>
+                    <input type="text" placeholder="" class="form-control" value="@Model.RequerenteModel.Req_Nome" disabled>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Email</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.RequerenteModel.Req_Email" disabled>
+                    </div>
+                   
+                </div>
+
+
+                <ul class="sortable-list connectList agile-list ui-'sortable" id="todo">
+                    <li class="info-element" id="task1">
+                        <strong> DADOS DO CONDUTOR</strong>
+                    </li>
+                </ul>
+                <div class="row form-group">
+                    <div class="col-md-2">
+                        <label>CPF</label>
+                    <input type="text" placeholder="" class="form-control" disabled  value="@Model.CondutorModel.Con_CPF">
+                    </div>
+                    <div class="col-md-5">
+                        <label>Nome</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.CondutorModel.Con_Nome">
+                    </div>
+                    <div class="col-md-2">
+                        <label>CNH</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.CondutorModel.Con_RegistroCNH">
+                    </div>
+                    <div class="col-md-1">
+                        <label>Validade</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.CondutorModel.Con_CNHValidade">
+                    </div>
+                     <div class="col-md-2">
+                        <label>Email</label>
+                        <input type="text" placeholder="" class="form-control" value="@Model.CondutorModel.Con_Email" disabled>
+                    </div>
+                    
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-2">
+                        <label>CEP</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.EndCondutoModel.EndCon_CEP">
+                    </div>                   
+                    <div class="col-md-5">
+                        <label>Logradouro</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.EndCondutoModel.EndCon_Logradouro">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Bairro</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.EndCondutoModel.EndCon_Bairro">
+                    </div>
+                     <div class="col-md-2">
+                        <label>Municipio</label>
+                    <input type="text" placeholder="" class="form-control" disabled value="@Model.EndCondutoModel.EndCon_Cidade">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="mail-attachment">
+            <p>
+            <span><i class="fa fa-paperclip"></i> <strong>Lista de documentos anexados </strong></span>
+               @* <a href="#">Download all</a>
+                |
+                <a href="#">View all images</a>*@
+            </p>
+
+            <div class="attachment">
+                @{
+                    @if (ViewBag.AnxProcessos != null)
+                    {
+                        foreach (var item in ViewBag.AnxProcessos)
+                        {
+                            <div class="file-box">
+                                <div class="file">
+                                    <a href="#">
+                                        <span class="corner"></span>
+                                       <div class="">
+                                        <a href="data:image/png;base64,@item.Base64Image" title="Comprovante do Condutor" data-gallery="">
+                                            <img alt="image" src="data:image/png;base64,@item.Base64Image" style="width: 100%; height: 150px;">
+                                        </a>
+                                    </div>
+                                        <div class="file-name">
+                                            <strong> Comprovante do Condutor</strong>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        }
+                    }
+                }
+                  @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning">
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(state => state.Errors))
+                            {
+                                <span>@error.ErrorMessage</span><br>
+                            }
+                        </div>
+                    }
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    
+        <div class="lightBoxGallery">
+
+            <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+            <div id="blueimp-gallery" class="blueimp-gallery">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <a class="play-pause"></a>
+                <ol class="indicator"></ol>
+            </div>
+
+        </div>
+
+
+
+
+        </div>
+
+
+
+
+        @*MODAL MOTIVO*@
+            <div class="ibox-content">
+                <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">Parecer</h4>
+                                <small class="font-bold">Selecione os motivos pela a reprovação.</small>
+                            </div>
+            
+                                <div class="ibox-content">
+                                  <label for="simple-select2">Motivo de cancelamento</label>
+                                        <select class="form-control" id="Canc_Id" name="Canc_Id" onchange="InserirMotivo(this)">
+                                            <option value="">Selecione um responsável:</option>
+                                            @{
+                                            if (ViewBag.ListaMot_Cancelamento != null)
+                                               {
+                                                foreach (var item in ViewBag.ListaMot_Cancelamento)
+                                                {
+                                                       <option value="@item.Canc_Id">@item.Canc_Nome</option>
+                                                }
+                                               }
+                                            }
+                                        </select>
+
+                                    <br />
+                                    <small>Motivo(s) selecionado(s)</small>
+                                   
+                                    <div id="div_ListaMotivos">
+                                    @await Html.PartialAsync("_ListaMotivos")
+                                    </div>
+                                        <br />
+                                    <div class="text-right">
+                                        <button type="button" class="btn btn-danger" onclick="AceitarProcesso('@Model.Pro_Id',0)">Reprovar processo</button>
+                                    </div>
+                                </div>
+                                    <br />
+                                
+              
+                        </div>           
+                    </div>
+                </div>
+            </div>
+        
+    }
+}
+    <!-- Mainly scripts -->
+   <script src="~/js/jquery-3.1.1.min.js"></script>
+
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/js/inspinia.js"></script>
+    <script src="~/js/plugins/pace/pace.min.js"></script>
+
+    <!-- Typehead -->
+    <script src="~/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="~/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- blueimp gallery -->
+    <script src="~/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- Peity demo data -->
+    <script src="~/js/demo/peity-demo.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/notiflix-notify-aio-3.2.6.min.js"></script>
+    <script src="~/js/notiflix-3.2.6.min.js"></script>
+    <script src="~/js/notiflix-aio-3.2.6.min.js"></script>
+    <script src='~/js/select2.min.js'></script>
+
+  

@@ -1,0 +1,156 @@
+﻿@model Protocolo_web_adm.Models.AutenticacaoModel;
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PROTOCOLO | Login </title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Bem vindo</h2>
+
+                <p>
+                    Apresentamos o nosso sistema de protocolo para abertura de processos de trânsito.
+                </p>
+                <p>
+                    Desenvolvido para simplificar e agilizar o seu dia a dia, oferecemos uma solução completa para abertura de processo.
+                </p>
+                <p>
+                    Com apenas alguns cliques, você poderá acessar todas as funcionalidades necessárias, garantindo um processo eficiente e transparente.
+                </p>
+                <p>
+                    Nossa plataforma intuitiva e amigável facilita a navegação, enquanto nossos recursos avançados garantem a segurança e confidencialidade dos seus dados.
+                </p>             
+
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form_login">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="email" asp-for="autEmail">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Senha" asp-for="autSenha">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" >
+                                 Mantenha Logado
+                            </label>                          
+                        </div>
+                  
+                        <button type="button" onclick="fun_logar(document.getElementById('autEmail').value, document.getElementById('autSenha').value)" class="btn btn-primary block full-width m-b">Login</button>
+
+
+                        <a href="#">
+                            <small>Esqueceu sua senha?</small>
+                        </a>
+
+                        <p class="text-muted text-center">
+                            <small>Não possui uma conta?</small>
+                        </p>
+                        <a class="btn btn-sm btn-white btn-block" href="register.html">Crie sua conta aqui</a>
+
+                        <br />
+                        
+                            
+
+                    </form>
+                    <p class="m-t">
+                   @*     <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>*@
+                    </p>
+
+                     @if (!ViewData.ModelState.IsValid)
+                        {
+                        <div class="alert alert-warning">
+                            @foreach (var error in ViewData.ModelState.Values.SelectMany(state => state.Errors))
+                            {
+                                <span>@error.ErrorMessage</span><br>
+                            }
+                        </div>
+                        }
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Grupo Recursos
+            </div>
+            <div class="col-md-6 text-right">
+                <small>© 2014-2023</small>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+
+<!-- Mainly scripts -->
+<script src="~/js/jquery-3.1.1.min.js"></script>
+
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script src="~/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="~/js/notiflix-notify-aio-3.2.6.min.js"></script>
+<script src="~/js/notiflix-3.2.6.min.js"></script>
+<script src="~/js/notiflix-aio-3.2.6.min.js"></script>
+
+
+<script>
+
+    function fun_logar(_usuario, _senha) {
+         Notiflix.Loading.dots();
+      
+        $.post('@Url.Action("Login", "Autenticacao")', { autEmail: _usuario, autSenha: _senha })
+        .done(function (result) {
+
+            window.location.href = '/triagem/triagemprocesso'
+              Notiflix.Loading.remove();
+            // Trate o caso de sucesso aqui, se necessário
+        })
+        .fail(function (xhr) {
+            var errorMessage;
+            if (xhr.status === 400 || xhr.status === 401 || xhr.status === 403) {
+                errorMessage = xhr.responseText;
+            } else {
+                errorMessage = 'Erro desconhecido.';
+            }
+            Notiflix.Notify.warning(errorMessage);
+
+               
+        });
+          
+    }
+   
+</script>
+ 

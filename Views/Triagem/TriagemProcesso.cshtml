@@ -1,0 +1,215 @@
+﻿@model List<Protocolo_web_adm.Models.ProcessoModel>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-2" >
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+        @*                <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">Processo abertos on-line</a>*@
+                        <h2>Bem vinda Janete Falcão</h2>
+                       @* <small>Você tem 6 processo em sua caixa.</small>*@
+                        <div class="space-25"></div>
+                        
+                            <ul class="folder-list m-b-md" style="padding: 0">                            
+                                @await Html.PartialAsync("_ListaQuantidade")                            
+                            </ul>
+                      
+                        <br />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10">       
+            <div id="div_Lista_Processo">
+                @await Html.PartialAsync("_ListaProcesso")
+            </div>
+
+            <div id="div_Lista_Detalhe_Processo" style="display:none">
+                @await Html.PartialAsync("_ListaDetalhamento")
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+
+    <!-- Mainly scripts -->
+   <script src="~/js/jquery-3.1.1.min.js"></script>
+
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/js/inspinia.js"></script>
+    <script src="~/js/plugins/pace/pace.min.js"></script>
+
+    <!-- Typehead -->
+    <script src="~/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="~/js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- blueimp gallery -->
+    <script src="~/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- Peity demo data -->
+    <script src="~/js/demo/peity-demo.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/notiflix-notify-aio-3.2.6.min.js"></script>
+    <script src="~/js/notiflix-3.2.6.min.js"></script>
+    <script src="~/js/notiflix-aio-3.2.6.min.js"></script>
+
+    <script src='~/js/select2.min.js'></script>
+
+
+    <script>
+       
+   
+         function InserirMotivo(selectElement) {
+       
+            var _canc_id = selectElement.value;
+            var _pro_id = $("#Pro_id").val();       
+
+            $.post('@Url.Action("InserirMotivoReprovacao", "Triagem")', { pro_id: _pro_id, canc_id: _canc_id })
+            .done(function(result) {
+                $('#div_ListaMotivos').html(result);  
+            })
+            .fail(function() {
+                // Erro - faça algo em caso de falha na requisição
+            });      
+        
+         }
+        
+           
+         $('#processosTable').DataTable({
+            lengthChange: false, // Isso oculta a opção "Show" (Exibir)
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
+            },
+         });       
+      
+        var div = document.getElementById("div_Lista_Detalhe_Processo");
+        div.style.display === "none"
+   
+        $(document).ready(function () {
+           $('.i-checks').iCheck({
+               checkboxClass: 'icheckbox_square-green',
+               radioClass: 'iradio_square-green',
+           });
+        });     
+
+
+       
+        function toggleDiv(pro_id) {
+            Notiflix.Loading.dots();
+            $.ajax({
+                url: '@Url.Action("ProcessoDetalhado", "Triagem")',
+                datatype: 'html',
+                contentType: "application/html; charset=utf-8",
+                type: "GET",
+                data: { pro_id: pro_id },
+
+                success: function (result) {
+                    var div = document.getElementById("div_Lista_Detalhe_Processo");
+                    var div2 = document.getElementById("div_Lista_Processo");
+                    var isDivHidden = div.style.display === "none";
+
+                    div.style.display = isDivHidden ? "block" : "none";
+                    div2.style.display = isDivHidden ? "none" : "block";
+                   $('#div_Lista_Detalhe_Processo').html(result);                                         
+                }
+            });
+            Notiflix.Loading.remove();
+        }
+
+       
+        function AceitarProcesso(pro_id, resultado) {         
+   
+           Notiflix.Confirm.show(
+                'Confirmar Aprovação',
+                'Deseja prosseguir com o resultado do processo?',
+                'Sim',
+                'Não',
+              function okCb() {
+                  $.get('@Url.Action("AceitaProcesso", "Triagem")',{ pro_id: pro_id, resultado: resultado })
+                  . done(function(result) {
+                      
+                      fecharModal();
+
+                      var div = document.getElementById("div_Lista_Detalhe_Processo");
+                      var div2 = document.getElementById("div_Lista_Processo");
+                      var isDivHidden = div.style.display === "none";
+
+                      div.style.display = isDivHidden ? "block" : "none";
+                      div2.style.display = isDivHidden ? "none" : "block"; 
+                      
+                      $('#div_Lista_Processo').html(result);
+                       
+                      $('#processosTable').DataTable({
+                          lengthChange: false, // Isso oculta a opção "Show" (Exibir)
+                          language: {
+                            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
+                          },
+                      }); 
+                      Notiflix.Notify.success('Processo concluido com sucesso');
+                  })
+                  .fail(function(xhr) {
+                        if (xhr.status === 400) {
+                            var errorMessage = xhr.responseText;
+                             Notiflix.Notify.warning(errorMessage);
+                        } else {
+                            Notiflix.Notify.warning('Erro desconhecido.');
+                        }
+                    }); 
+                   
+              },
+              function cancelCb() {},
+           );
+
+        }
+
+        function DeleteMotivo(pro_id,mov_id) {
+ 
+            $.get('@Url.Action("DeleteMotivoProcesso", "Triagem")',{ pro_id: pro_id, mov_id: mov_id })
+            . done(function(result) {                     
+                $('#div_ListaMotivos').html(result);  
+            })
+            .fail(function(xhr) {
+                if (xhr.status === 400) {
+                    var errorMessage = xhr.responseText;
+                        Notiflix.Notify.warning(errorMessage);
+                } else {
+                    Notiflix.Notify.warning('Erro desconhecido.');
+                }
+            });  
+        }  
+        
+
+        function fecharModal() {
+        $("#myModal5").modal("hide"); // Isso fecha a modal usando a biblioteca Bootstrap
+        $(".modal-backdrop").hide();
+        }
+
+        function abrirModal() {
+            $("#myModal5").show();
+        }
+
+ 
+   
+
+
+
+
+    </script>
+

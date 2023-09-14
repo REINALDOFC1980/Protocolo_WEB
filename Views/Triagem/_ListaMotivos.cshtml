@@ -1,0 +1,15 @@
+﻿<ul class="todo-list m-t small-list">
+   @{
+      if (ViewBag.Motivos != null)
+      {
+         foreach (var item in ViewBag.Motivos)
+         {
+            <li >
+                <span class="m-l-xs">@item.Canc_Nome</span> - 
+               <i class="fa fa-trash text-right" onclick="DeleteMotivo('@item.Canc_Pro_id', '@item.Canc_Id')" style="cursor: pointer;"></i>
+            </li>
+
+         }     
+      }      
+    }
+</ul>

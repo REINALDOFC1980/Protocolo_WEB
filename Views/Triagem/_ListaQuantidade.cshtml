@@ -1,0 +1,15 @@
+﻿
+@{    
+    if (ViewBag.QtdProcessos != null)
+    {
+        foreach (var item in ViewBag.QtdProcessos)
+        {
+           <li><a href="@Url.Action("TriagemProcesso", "Triagem")"> <i class="fa fa-inbox"></i> Processos <span class="label label-info float-right">@item.Total</span> </a></li>
+           <li><a href="#"> <i class="fa fa-clock-o"></i> Novos <span class="label label-success float-right">@item.Novo</span></a></li>
+           <li><a href="#"> <i class="fa fa-exclamation-triangle"></i> Recentes <span class="label label-warning float-right">@item.Recente</span> </a></li>
+           <li><a href="#"> <i class="fa fa-exclamation-triangle"></i> Atrasados <span class="label label-inverse float-right">@item.Atrasado</span> </a></li>
+        }     
+    }      
+}
+
+
