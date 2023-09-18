@@ -112,7 +112,7 @@
 
        
         function toggleDiv(pro_id) {
-            Notiflix.Loading.dots();
+          
             $.ajax({
                 url: '@Url.Action("ProcessoDetalhado", "Triagem")',
                 datatype: 'html',
@@ -121,16 +121,18 @@
                 data: { pro_id: pro_id },
 
                 success: function (result) {
+                     Notiflix.Loading.dots();
                     var div = document.getElementById("div_Lista_Detalhe_Processo");
                     var div2 = document.getElementById("div_Lista_Processo");
                     var isDivHidden = div.style.display === "none";
 
                     div.style.display = isDivHidden ? "block" : "none";
                     div2.style.display = isDivHidden ? "none" : "block";
-                   $('#div_Lista_Detalhe_Processo').html(result);                                         
+                   $('#div_Lista_Detalhe_Processo').html(result);
+                Notiflix.Loading.remove();
                 }
             });
-            Notiflix.Loading.remove();
+           
         }
 
        

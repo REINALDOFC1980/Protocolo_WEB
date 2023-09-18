@@ -70,7 +70,8 @@ namespace Protocolo_web_adm.Controllers
 
                     List<Claim> claims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Email, loginResponse.autenticacaoModel.autNome),
+                        new Claim(ClaimTypes.Email, loginResponse.autenticacaoModel.autEmail),
+                        new Claim(ClaimTypes.Name, loginResponse.autenticacaoModel.autNome),
                         new Claim("Token", loginResponse.token),
                     };
 

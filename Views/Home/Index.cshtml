@@ -1,260 +1,38 @@
 ﻿
 
 
-        <div class="text-left  p-3">
-                <a href="#"   class="btn btn-sm btn-primary" id="lightVersion"><i class="fa fa-calendar"></i> Agendamento</a>
-                <a href="#"   class="btn btn-sm btn-primary" id="darkVersion"><i class="fa fa-address-card"></i> Consultar AIT</a>
-                <a href="#"   class="btn btn-sm btn-primary" id="leftVersion"><i class="fa fa-file"></i> Consultar Processo</a>
-                <a href="#" class="btn btn-sm btn-primary" id="leftVersion"><i class="fa fa-paperclip"></i> Documentação</a>
-        </div>
 
-        <div class="wrapper wrapper-content  animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>Abertura de Processso</h5>
-                        </div>
-                        <div class="ibox-content">
+<!-- Mainly scripts -->
+<script src="~/js/jquery-3.1.1.min.js"></script>
 
-                            <form role="form" id="form">
-                                <div class="row form-group">                                    
-                                    <div class="col-md-2">
-                                        <label>Numero do AIT</label> 
-                                        <input type="text" placeholder="" class="form-control" required>
-                                    </div>                                    
-                                    <div class="col-md-2">
-                                        <label>Placa</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>                                    
-                                    <div class="col-md-4">
-                                        <label>Situação</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>
-                                     <div class="col-md-2">
-                                        <label>Data da infração</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Confirmar da placa</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>                               
-                                </div>
-                               
-                                
-                                
-                                <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
-                                    <li class="warning-element" id="task1">
-                                        <strong> DADOS DO PROPRIETÁRIO</strong>
-                                    </li>                                
-                                </ul>
-                                <div class="row form-group">                                    
-                                    <div class="col-md-2">
-                                        <label>CPF</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                     </div>                                    
-                                    <div class="col-md-10">
-                                        <label>Nome</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                </div>  
-                                <div class="row form-group">    
-                                    <div class="col-md-2">
-                                        <label>CEP</label> 
-                                        <input type="text" placeholder="" class="form-control"disabled >
-                                    </div>
-                                     <div class="col-md-7">
-                                        <label>Municipio</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Bairro</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div>                               
-                                </div>                                
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.js"></script>
+<script src="~/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-                                 <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
-                                    <li class="success-element" id="task1">
-                                        <strong>DADOS DO SERVIÇO</strong>
-                                    </li>                                
-                                </ul>
+<!-- Custom and plugin javascript -->
+<script src="~/js/inspinia.js"></script>
+<script src="~/js/plugins/pace/pace.min.js"></script>
 
-                                <div class="row form-group">                    
-                                     
-                                    <div class="col-md-5">
-                                        <label>Serviço</label> <small>Auto-Complete</small>
-                                        <input type="text" placeholder="Digite o serviço desejado" class="form-control">
-                                    </div>                                     
-                                    
-                                    <div class="col-md-3">
-                                     <label>Restrição</label>
-                                        <select class="form-control m-b" name="account">
-                                            <option>NENHUMA</option>
-                                            <option>DOC SEM AUTENTICIDADE</option>
-                                            <option>JURÍDICA SEM CONDUTOR</option>
-                                            <option>SEM DOCUMENTAÇÃO DO SOLICITANTE</option>
-                                            <option>CNH ESTRANGEIRA</option>
-                                             <option>DOCUMENTAÇÃO INCOMPLETA</option>
-                                             <option>AIT PENALIZADO</option>                                                                                        
-                                        </select>
-                                    </div> 
-                                    <div class="col-md-2">
-                                        <label>Origem</label>
-                                        <select class="form-control m-b" name="account">
-                                            <option>SETAP</option>
-                                            <option>CORREIOS</option>
-                                            <option>WEB</option>
-                                        </select>
-                                    </div> 
-                                     <div class="col-md-2">
-                                        <label>Data da Postagem</label> 
-                                        <input type="text" placeholder="" class="form-control">
-                                    </div> 
-                                    
-                                </div>  
-                                
-                                <div class="row form-group">                                    
-                                    <div class="col-md-12">
-                                        <label>Observação</label> 
-                                       <textarea id="story" class="form-control" name="story" rows="2"></textarea>
-                                     </div>                                   
-                                    
-                                </div> 
+<!-- Typehead -->
+<script src="~/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+<!-- iCheck -->
+<script src="~/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- blueimp gallery -->
+<script src="~/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+<!-- Peity -->
+<script src="~/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Peity demo data -->
+<script src="~/js/demo/peity-demo.js"></script>
 
 
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="~/js/notiflix-notify-aio-3.2.6.min.js"></script>
+<script src="~/js/notiflix-3.2.6.min.js"></script>
+<script src="~/js/notiflix-aio-3.2.6.min.js"></script>
 
-                                <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
-                                    <li class="info-element" id="task1">
-                                        <strong> DADOS DO CONDUTOR</strong>
-                                    </li>                                
-                                </ul>
-                                <div class="row form-group">                                    
-                                    <div class="col-md-2">
-                                        <label>CPF</label> 
-                                        <input type="text" placeholder="" class="form-control" >
-                                     </div>                                    
-                                    <div class="col-md-6">
-                                        <label>Nome</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                    <div class="col-md-2">
-                                        <label>CNH</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                     <div class="col-md-2">
-                                        <label>Validade</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                </div>                        
-                            </form>                         
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>Realizar abertura</h5>
-                        </div>
-                        <div class="ibox-content">
-
-                            <form role="form" id="form">
-                               
-                                <div class="row form-group">
-                                    <div class="col-md-4">
-                                        <label>Numero do Protocolo</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <label>Processo vinculado</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled >
-                                    </div> 
-                                    <div class="col-md-4">
-                                        <label>Status</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                </div> 
-                                  <div class="row form-group">
-                                        <div class="col-md-12">
-                                        <label>Serviço</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                      </div> 
-                                <div class="row form-group">                                    
-                                    <div class="col-md-5">
-                                        <label>Data da Abertura</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled >
-                                        </div>                                    
-                                    <div class="col-md-7">
-                                        <label>Nome do Atendente</label> 
-                                        <input type="text" placeholder="" class="form-control" disabled>
-                                    </div> 
-                                </div> 
-                                 <div class="hr-line-dashed"></div>
-                                 <div class="col-sm-12 text-center col-sm-offset-0">   
-                                      <button class="btn btn-primary btn-lg" type="submit">Gerar Processo</button> 
-                                       <button class="btn btn-white btn-lg" type="submit">Limpar Processo</button>
-                                       <button class="btn btn-white btn-lg" type="submit">Imprimir Etiqueta</button>
-                                 </div> 
-                            </form>
-
-                        </div>
-                    </div>
-                     <div class="ibox ">
-                        <div class="ibox-title">
-                            <h5>Documentos Necessários</h5>
-                        </div>
-                        <div class="ibox-content">
-
-                            <form role="form" id="form">
-                                <div class="col-sm-10">
-                                        <div><label> <input type="checkbox" value=""> CNH ou RG do Proprietário </label></div>
-                                        <div><label> <input type="checkbox" value=""> CRLV </label></div>
-                                        <div><label> <input type="checkbox" value=""> NAI </label></div>
-                                        <div><label> <input type="checkbox" value=""> Exposição da Defesa </label></div>
-                                        <div><label> <input type="checkbox" value=""> Comprovante de Residência </label></div>                                                                               
-                                </div>
-                                 <div class="col-sm-12 col-sm-offset-0">                                    
-                                        <button class="btn btn-white btn-xm" type="submit">Apagar Anexos</button>
-                                        <button class="btn btn-primary btn-xm" type="submit">Escanear Documento</button>
-                                    </div>  
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-    <script src="~/js/jquery-3.1.1.min.js"></script>
-    <script src="~/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-
-    <!-- Jquery Validate -->
-    <script src="~/js/plugins/validate/jquery.validate.min.js"></script>
-
-    <script src="~/js/plugins/iCheck/icheck.min.js"></script>
-
-
-
-
-
-     <script>
-            $(document).ready(function () {
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                });
-            });
-        </script>
-    <script>
-         $(document).ready(function(){
-
-             $("#form").validate({
-                 
-             });
-        });
-    </script>
-
+<script src='~/js/select2.min.js'></script>

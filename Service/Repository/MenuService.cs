@@ -21,9 +21,9 @@ namespace Protocolo_web_adm.Service.Repository
                 var query = @"select Distinct MP_id, MP_Descricao
                                  from MenuPai inner join MenuFilho on(MP_id = MF_MP_Id)
                                              inner join Usuario_Menu  on (MF_id = Usu_Menu_MF_Id)
-											 inner join API_USuario on (Usu_Menu_Usu_id = Usu_id)
-                                             inner join API_Autenticacao on (Usu_Menu_Usu_id  = Aut_id)
-                               where Aut_Email = @email";
+											 
+                                             inner join GR_APCI_BA_Salvador.dbo.APIAutenticacao on (Usu_Menu_Usu_id  = Autid)
+                               where AutEmail = @email";
 
                 var dbParametro = new DynamicParameters();
                 dbParametro.Add("@email", email);
@@ -47,9 +47,9 @@ namespace Protocolo_web_adm.Service.Repository
                 var query = @"select MF_Descricao, ControllerName,ActionName 
 					      from MenuPai inner join MenuFilho on(MP_id = MF_MP_Id)
                                              inner join Usuario_Menu  on (MF_id = Usu_Menu_MF_Id)
-											 inner join API_USuario on (Usu_Menu_Usu_id = Usu_id)
-                                             inner join API_Autenticacao on (Usu_Menu_Usu_id  = Aut_id)
-                      where MP_Id = @id and Aut_Email = @email ";
+											
+                                             inner join GR_APCI_BA_Salvador.dbo.APIAutenticacao on (Usu_Menu_Usu_id  = Autid)
+                      where MP_Id = @id and AutEmail = @email";
 
                 var dbParametro = new DynamicParameters();
                 dbParametro.Add("@id", id);

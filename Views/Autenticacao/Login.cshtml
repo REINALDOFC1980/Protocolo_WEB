@@ -129,13 +129,13 @@
 <script>
 
     function fun_logar(_usuario, _senha) {
-         Notiflix.Loading.dots();
+      
       
         $.post('@Url.Action("Login", "Autenticacao")', { autEmail: _usuario, autSenha: _senha })
         .done(function (result) {
-
-            window.location.href = '/triagem/triagemprocesso'
-              Notiflix.Loading.remove();
+            Notiflix.Loading.dots();
+            window.location.href = '/home/index'
+           
             // Trate o caso de sucesso aqui, se necessário
         })
         .fail(function (xhr) {
@@ -149,7 +149,7 @@
 
                
         });
-          
+        Notiflix.Loading.remove();
     }
    
 </script>

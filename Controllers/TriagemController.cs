@@ -32,7 +32,7 @@ namespace Protocolo_web_adm.Controllers
 
         public async Task<IActionResult> TriagemProcesso()
         {
-      
+
             //Montagem do Menu
             var email = User.FindFirstValue(ClaimTypes.Email);
             var menusPai = _Mservice.ListaMenuPai(email);
@@ -161,7 +161,7 @@ namespace Protocolo_web_adm.Controllers
 
             //verificando se existe processo
             List<MotivoCancelamentoModel> motivoCancelamentos = null;
-            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"processo/buscamotivoscancelamentoprocesso/{Pro_id}", Method.Get, null, token);
+            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"buscamotivoscancelamentoprocesso/{Pro_id}", Method.Get, null, token);
             if (!MotivosResponse.IsSuccessful)
             {
                 return StatusCode(400, "É necessário selecionar um motivo.");
@@ -176,7 +176,7 @@ namespace Protocolo_web_adm.Controllers
             };
 
 
-            var triagem_response = await _apiService.ExecuteApiRequestAsync("/processo/InserirResultado", Method.Post, triagemProcesso, token);
+            var triagem_response = await _apiService.ExecuteApiRequestAsync("/InserirResultado", Method.Post, triagemProcesso, token);
 
             if (!triagem_response.IsSuccessful)
             {
@@ -199,7 +199,7 @@ namespace Protocolo_web_adm.Controllers
                 Canc_Usuario = "janeteac",
             };
 
-            var triagem_response = await _apiService.ExecuteApiRequestAsync($"processo/inserirmotivoreprovacao", Method.Post, motivoCancelamento, token);
+            var triagem_response = await _apiService.ExecuteApiRequestAsync($"inserirmotivoreprovacao", Method.Post, motivoCancelamento, token);
 
             if (!triagem_response.IsSuccessful)
             {
@@ -208,7 +208,7 @@ namespace Protocolo_web_adm.Controllers
 
 
             List<MotivoCancelamentoModel> motivoCancelamentos = null;
-            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"processo/buscamotivoscancelamentoprocesso/{pro_id}", Method.Get, null, token);
+            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"buscamotivoscancelamentoprocesso/{pro_id}", Method.Get, null, token);
             if (MotivosResponse.IsSuccessful)
             {
                 string MotCancBody = MotivosResponse.Content;
@@ -231,11 +231,11 @@ namespace Protocolo_web_adm.Controllers
 
             //deletanto o motivo
             string token = User.FindFirstValue("Token");
-            await _apiService.ExecuteApiRequestAsync($"processo/deletemotivoprocesso/{mov_id}", Method.Delete, null, token);
+            await _apiService.ExecuteApiRequestAsync($"deletemotivoprocesso/{mov_id}", Method.Delete, null, token);
 
             //realimentando a lista
             List<MotivoCancelamentoModel> motivoCancelamentosProcesso = null;
-            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"processo/buscamotivoscancelamentoprocesso/{pro_id}", Method.Get, null, token);
+            var MotivosResponse = await _apiService.ExecuteApiRequestAsync($"buscamotivoscancelamentoprocesso/{pro_id}", Method.Get, null, token);
             if (MotivosResponse.IsSuccessful)
             { 
                 string MotCancBody = MotivosResponse.Content;
